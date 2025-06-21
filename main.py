@@ -1,13 +1,8 @@
 from fastapi import FastAPI
+import models
+from database import engine
 
 app = FastAPI()
 
-
-@app.get("/")
-def index():
-    return {"message": "Hello"}
-
-
-@app.post("/todos")
-def get_todo():
-    return {"message": "TOdo"}
+# run only data not exist
+models.Base.metadata.create_all(bind=engine)
